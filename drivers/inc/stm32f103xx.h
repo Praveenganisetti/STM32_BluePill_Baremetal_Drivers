@@ -22,6 +22,14 @@
 #define NVIC_ICER2                  ((__vo uint32_t *)0xE000E188)
 #define NVIC_ICER3                  ((__vo uint32_t *)0xE000E18c)
 
+/*
+ * ARM CORTEX Mx Processor Priority Register Address calculation
+ */
+#define NVIC_PR_BASE_ADDR           ((__vo uint32_t *)0xE000E400)
+
+
+#define NO_PR_BITS_IMPLEMENTED      4
+
 
 #define FLASH_BASE_ADDR             0x08000000U
 #define SRM_BASE_ADDR               0x20000000U
@@ -191,6 +199,22 @@ typedef struct
 #define SPI3_PCLK_EN()              (RCC->APB1ENR |= (1 << 15))
 
 /*
+ * register definition peripheral structre for USARTx 
+ */
+typedef struct
+{
+    __vo uint32_t SR;
+    __vo uint32_t DR;
+    __vo uint32_t BRR;
+    __vo uint32_t CR[3];
+    __vo uint32_t GTPR;
+}USART_RegDef_t;
+
+#define USART1      ((USART_RegDef_t *)USART1_BASEADDR)
+#define USART2      ((USART_RegDef_t *)USART2_BASEADDR)
+#define USART3      ((USART_RegDef_t *)USART3_BASEADDR)
+
+/*
  * clock enable macros for USARTx and UARTx peripherals 
  */
 
@@ -289,13 +313,13 @@ typedef struct
  * IRQ( Interrupt request) number for STM32F103XX
  * TODO : May need to compleate for all the other peripherals
  */
-#define IRQ_NO_EXTI0                    13
-#define IRQ_NO_EXTI1                    14
-#define IRQ_NO_EXTI2                    15
-#define IRQ_NO_EXTI3                    16
-#define IRQ_NO_EXTI4                    17
-#define IRQ_NO_EXTI9_5                  30
-#define IRQ_NO_EXTI15_10                47
+#define IRQ_NO_EXTI0                    6
+#define IRQ_NO_EXTI1                    7
+#define IRQ_NO_EXTI2                    8
+#define IRQ_NO_EXTI3                    9
+#define IRQ_NO_EXTI4                    10
+#define IRQ_NO_EXTI9_5                  23
+#define IRQ_NO_EXTI15_10                40
 
 /*
  * Generic macros 

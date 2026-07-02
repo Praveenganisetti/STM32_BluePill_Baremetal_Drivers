@@ -81,10 +81,10 @@ typedef struct
 #define PIN13       13
 #define PIN14       14
 
-
-#define EXTI_RT_BIT             0
-#define EXTI_FT_BIT             1
-#define EXTI_RFT_BIT            2
+/*** For GPIO/EXTI interrupts ***/
+#define GPIO_IT_RT_BIT             0
+#define GPIO_IT_FT_BIT             1
+#define GPIO_IT_RFT_BIT            2
 
 
 /****************** API's supported by the driver *******************/

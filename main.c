@@ -1,5 +1,6 @@
 #include "stm32f103xx_gpio.h"
 #include "stm32f103xx.h"
+#include "stm32f103xx_spi.h"
 #include <stdint.h>
 
 #define HIGH 1
@@ -35,8 +36,6 @@ int main(void)
     GPIO_PeriClockControl(GPIOB, ENABLE);
     GPIO_Init(&GPIOBtn);
 
-    
-
     GPIO_WriteToOutputPin(GPIOB, PIN12, ENABLE);
 
     // Irq configurations
@@ -44,6 +43,7 @@ int main(void)
     GPIO_IRQPriorityConfig(IRQ_NO_EXTI15_10, 15);
     GPIO_IRQInterruptConfig(IRQ_NO_EXTI15_10, ENABLE);
 
+    SPI_PeriClockControl(SPI1, ENABLE);
     while (1);
  
 }

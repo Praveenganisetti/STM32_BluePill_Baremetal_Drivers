@@ -32,9 +32,9 @@
 
 
 #define FLASH_BASE_ADDR             0x08000000U
-#define SRM_BASE_ADDR               0x20000000U
+#define SRAM_BASE_ADDR              0x20000000U
 #define ROM_BASE_ADDR               0x1FFFF000U /* system memory */
-#define                             SRAM SRM_BASE_ADDR
+#define                             SRAM SRAM_BASE_ADDR
 
 /*
  * AHB and APBx peripheral bus base addresses
@@ -109,6 +109,18 @@ typedef struct
     __vo uint32_t LCKR;
 }GPIO_RegDef_t ;
 
+/*
+ * peripheral definitions ( peripheral base addresses typecasted to GPIO_RegDef_t )
+ */
+
+#define GPIOA      ((GPIO_RegDef_t *)GPIOA_BASEADDR)
+#define GPIOB      ((GPIO_RegDef_t *)GPIOB_BASEADDR)
+#define GPIOC      ((GPIO_RegDef_t *)GPIOC_BASEADDR)
+#define GPIOD      ((GPIO_RegDef_t *)GPIOD_BASEADDR)
+#define GPIOE      ((GPIO_RegDef_t *)GPIOE_BASEADDR)
+#define GPIOF      ((GPIO_RegDef_t *)GPIOF_BASEADDR)
+#define GPIOG      ((GPIO_RegDef_t *)GPIOG_BASEADDR)
+
 typedef struct
 {
     __vo uint32_t CR;
@@ -152,19 +164,29 @@ typedef struct
     __vo uint32_t MAPR2;
 }AFIO_RegDef_t;
 
-#define AFIO        ((AFIO_RegDef_t *)AFIO_BASEADDR)
-
 /*
- * peripheral definitions ( peripheral base addresses typecasted to GPIO_RegDef_t )
- */
+ * register definition peripheral structre for AFIO 
+*/
+typedef struct
+{
+    __vo uint32_t CR1;
+    __vo uint32_t CR2;
+    __vo uint32_t SR;
+    __vo uint32_t DR;
+    __vo uint32_t CRCPR;
+    __vo uint32_t RXCRCR;
+    __vo uint32_t TXCRCR;
+    __vo uint32_t I2SCFGR;
+    __vo uint32_t I2SPR;
+}SPI_RegDef_t;
 
-#define GPIOA      ((GPIO_RegDef_t *)GPIOA_BASEADDR)
-#define GPIOB      ((GPIO_RegDef_t *)GPIOB_BASEADDR)
-#define GPIOC      ((GPIO_RegDef_t *)GPIOC_BASEADDR)
-#define GPIOD      ((GPIO_RegDef_t *)GPIOD_BASEADDR)
-#define GPIOE      ((GPIO_RegDef_t *)GPIOE_BASEADDR)
-#define GPIOF      ((GPIO_RegDef_t *)GPIOF_BASEADDR)
-#define GPIOG      ((GPIO_RegDef_t *)GPIOG_BASEADDR)
+#define SPI1    ((SPI_RegDef_t *)SPI1_BASEADDR)
+#define SPI2    ((SPI_RegDef_t *)SPI2_BASEADDR)
+#define SPI3    ((SPI_RegDef_t *)SPI3_BASEADDR)
+
+
+
+#define AFIO        ((AFIO_RegDef_t *)AFIO_BASEADDR)
 
 
 /*                                                                                                  */
@@ -332,6 +354,25 @@ typedef struct
 #define GPIO_PIN_SET        SET
 #define GPIO_PIN_RESET      RESET
 
+/*****************************************************************************************
+ * SPI peripheral macros for SPI register BIT Fields
+*****************************************************************************************/
+
+// SPI_CR1 register
+#define SPI_CR1_CPHA        0
+#define SPI_CR1_CPOL        1
+#define SPI_CR1_MSTR        2
+#define SPI_CR1_BR          3
+#define SPI_CR1_SPE         6
+#define SPI_CR1_LSBFIRST    7
+#define SPI_CR1_SSI         8
+#define SPI_CR1_SSM         9
+#define SPI_CR1_RXONLY      10
+#define SPI_CR1_DFF         11
+#define SPI_CR1_CRCNEXT     12
+#define SPI_CR1_CRCEN       13
+#define SPI_CR1_BIDI_OE     14 // output enable in bidirectional mode
+#define SPI_CR1_BIDI_MODE   15
 
 
 #endif // !STM32F103XX_H_
